@@ -1,10 +1,10 @@
-package com.erudio;
+package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ErudioApplicationTests {
+class Erudio1ApplicationTests {
 
 	@Test
 	void contextLoads() {
