@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.data.vo.v1.PersonVO;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonServices;
 
@@ -18,23 +19,23 @@ public class PersonController {
 	private PersonServices service;
 	
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value="id")Long id) {
+	public PersonVO findById(@PathVariable(value="id")Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll(){
+	public List<PersonVO> findAll(){
 		return service.findAll();
 	}
 	
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Person create(@RequestBody Person person) {
-		return service.create(person);
+	public PersonVO create(@RequestBody PersonVO personvo) {
+		return service.create(personvo);
 	}
 	
 	@PutMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Person update(@RequestBody Person person) {
-		return service.update(person);
+	public PersonVO update(@RequestBody PersonVO personvo) {
+		return service.update(personvo);
 	}
 	
 	@DeleteMapping(value="/{id}")
