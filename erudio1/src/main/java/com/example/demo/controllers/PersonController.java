@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.data.vo.v1.PersonVO;
+import com.example.demo.data.vo.v2.PersonVOV2;
+import com.example.demo.mapper.custom.PersonMapper;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonServices;
 
@@ -17,6 +19,7 @@ import com.example.demo.service.PersonServices;
 public class PersonController {
 	@Autowired
 	private PersonServices service;
+	
 	
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public PersonVO findById(@PathVariable(value="id")Long id) {
@@ -31,6 +34,11 @@ public class PersonController {
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE)
 	public PersonVO create(@RequestBody PersonVO personvo) {
 		return service.create(personvo);
+	}
+	
+	@PostMapping(value="/v2",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public PersonVOV2 createV2(@RequestBody PersonVOV2 personvo) {
+		return service.createV2(personvo);
 	}
 	
 	@PutMapping(consumes=MediaType.APPLICATION_JSON_VALUE)

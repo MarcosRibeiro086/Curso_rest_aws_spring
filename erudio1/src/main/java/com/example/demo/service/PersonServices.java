@@ -5,8 +5,10 @@ import java.util.concurrent.atomic.*;
 import java.util.logging.Logger;
 
 import com.example.demo.data.vo.v1.PersonVO;
+import com.example.demo.data.vo.v2.PersonVOV2;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.mapper.DozerMapper;
+import com.example.demo.mapper.custom.PersonMapper;
 import com.example.demo.model.Person;
 import com.example.demo.repositories.PersonRepository;
 
@@ -21,6 +23,8 @@ public class PersonServices {
 	
 	@Autowired
 	PersonRepository repository;
+	@Autowired
+	PersonMapper mapper;
 	
 	public List<PersonVO> findAll(){
 		
@@ -46,6 +50,17 @@ public class PersonServices {
 		var entity = DozerMapper.parseObject(person,Person.class);
 		//converte para VO para apresentar os dados;
 		var vo=DozerMapper.parseObject( repository.save(entity),PersonVO.class);
+		
+		return vo;
+	}
+	//criando uma v2 para opção de campos, utilizando mapper customizado para o vov2
+	public PersonVOV2 createV2 (PersonVOV2 person) {
+		logger.info("Creating one PersonVO!");
+		
+		//converter para person para salvar no banco
+		var entity = mapper.convertVoToEntity(person);
+		//converte para VO para apresentar os dados;
+		var vo=mapper.convertEntityToVo( repository.save(entity));
 		
 		return vo;
 	}
