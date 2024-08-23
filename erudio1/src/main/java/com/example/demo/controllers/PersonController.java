@@ -15,7 +15,7 @@ import com.example.demo.model.Person;
 import com.example.demo.service.PersonServices;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person/v1")
 public class PersonController {
 	@Autowired
 	private PersonServices service;
